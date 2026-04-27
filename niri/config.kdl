@@ -424,7 +424,7 @@ binds {
     // Mod+Shift+T { toggle-window-floating; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Enter hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Ctrl+Alt+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Ctrl+Shift+Escape hotkey-overlay-title="Task Manager: btop" { spawn "alacritty" "-e" "btop"; }
     Mod+P hotkey-overlay-title="Displays: nwg-displays" { spawn "nwg-displays"; }
@@ -639,7 +639,7 @@ binds {
     // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
     // This bind corresponds to normal window maximizing,
     // e.g. by double-clicking on the titlebar.
-    Mod+M { maximize-window-to-edges; }
+    // Mod+M { maximize-window-to-edges; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".

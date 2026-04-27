@@ -10,7 +10,7 @@ binds {
     Mod+F1                               { show-hotkey-overlay; }
 
     // ─── Applications ───
-    Mod+Enter                           hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
+    Mod+Return                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
     Ctrl+Alt+T                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
     Ctrl+Shift+Escape                   hotkey-overlay-title="Task Manager: btop" { spawn "alacritty" "-e" "btop"; }
     Mod+P                               hotkey-overlay-title="Displays: nwg-displays" { spawn "nwg-displays"; }

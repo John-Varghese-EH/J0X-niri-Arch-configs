@@ -24,7 +24,7 @@ This setup uses a combination of "Windows-familiar" shortcuts and intelligent ti
 | :--- | :--- |
 | **`Alt+Space`** / **`Mod+R`** | Open App Launcher (Noctalia) |
 | **`Mod+E`** | Open File Manager (Nautilus) |
-| **`Mod+Enter`** / **`Ctrl+Alt+T`** | Open Terminal (Alacritty) |
+| **`Mod+Return`** / **`Ctrl+Alt+T`** | Open Terminal (Alacritty) |
 | **`Mod+B`** | Open Browser (Helium) |
 | **`Ctrl+Shift+Escape`** | Task Manager (btop) |
 | **`Mod+P`** / **`XF86Display`** | Displays (nwg-displays) |
