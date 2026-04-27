@@ -10,13 +10,14 @@ binds {
     Mod+F1                               { show-hotkey-overlay; }
 
     // ─── Applications ───
-    Mod+CTRL+T                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
+    Mod+Enter                           hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
+    Ctrl+Alt+T                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
     Ctrl+Shift+Escape                   hotkey-overlay-title="Task Manager: btop" { spawn "alacritty" "-e" "btop"; }
     Mod+P                               hotkey-overlay-title="Displays: nwg-displays" { spawn "nwg-displays"; }
     XF86Display                         allow-when-locked=true hotkey-overlay-title="Displays: nwg-displays" { spawn "nwg-displays"; }
-    // ALT+Space	                        hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+R                               hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     ALT+Space                           hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+B                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
+    Mod+B                               hotkey-overlay-title="Open Browser: helium" { spawn "helium"; }
     // Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+L                               hotkey-overlay-title="Lock Screen: swaylock" { spawn "swaylock"; }
     Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
@@ -46,11 +47,11 @@ binds {
     Mod+H                               { focus-column-left; }
     Mod+Right                           { focus-column-right; }
     // Mod+L                               { focus-column-right; }
-    // Mod+Up                              { focus-window-up; }
-    Mod+Up                              { maximize-column; }
+    Mod+Up                              { focus-window-up; }
     Mod+K                               { focus-window-up; }
     Mod+Down                            { focus-window-down; }
     Mod+J                               { focus-window-down; }
+    Mod+M                               { maximize-column; }
 
     Mod+CTRL+Left                       { move-column-left; }
     Mod+CTRL+H                          { move-column-left; }

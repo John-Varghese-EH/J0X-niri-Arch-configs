@@ -420,11 +420,12 @@ binds {
     // This makes the floating window follow you across workspaces
     Mod+Shift+S { spawn "niri-float-sticky" "-ipc" "toggle_sticky"; }
     
-    // Changed to T to avoid collisions with Shift+F (fullscreen) and Shift+P (power)
-    Mod+Shift+T { toggle-window-floating; }
+    Mod+T { toggle-window-floating; }
+    // Mod+Shift+T { toggle-window-floating; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Enter hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Ctrl+Alt+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Ctrl+Shift+Escape hotkey-overlay-title="Task Manager: btop" { spawn "alacritty" "-e" "btop"; }
     Mod+P hotkey-overlay-title="Displays: nwg-displays" { spawn "nwg-displays"; }
     XF86Display allow-when-locked=true hotkey-overlay-title="Displays: nwg-displays" { spawn "nwg-displays"; }
@@ -432,8 +433,9 @@ binds {
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+E hotkey-overlay-title="File Manager: nautilus" { spawn "nautilus"; }
+    Mod+R hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Alt+Space hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+B hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
+    Mod+B hotkey-overlay-title="Open Browser: helium" { spawn "helium"; }
     Mod+Shift+Q hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -622,14 +624,14 @@ binds {
     Mod+Period { expel-window-from-column; }
 
     // Cycle through widths set in preset-column-widths.
-    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-column-width; }
     // Cycling through the presets in reverse order is also possible.
-    Mod+Shift+R { switch-preset-column-width-back; }
+    Mod+Ctrl+Shift+R { switch-preset-column-width-back; }
 
-    Mod+Ctrl+Shift+R { switch-preset-window-height; }
+    Mod+Alt+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
 
-    Mod+F { maximize-column; }
+    Mod+M { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     F11 { fullscreen-window; }
 

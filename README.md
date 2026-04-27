@@ -1,3 +1,4 @@
+git submodule add https://github.com/John-Varghese-EH/Limine-Theme-J0X limine
 # 🌌 J0X's CachyOS Advanced Setup 🌌
 
 Welcome to my personal, highly customized, and heavily optimized Linux setup. This repository contains dotfiles and configurations for a state-of-the-art **CachyOS** environment, featuring the **Niri** compositor, **Nocria** shell, a complete suite of **BlackArch** penetration testing tools, and a stunning custom **Limine** bootloader theme.
@@ -21,10 +22,10 @@ This setup uses a combination of "Windows-familiar" shortcuts and intelligent ti
 
 | Shortcut | Action |
 | :--- | :--- |
-| **`Alt+Space`** | Open App Launcher (Noctalia) |
+| **`Alt+Space`** / **`Mod+R`** | Open App Launcher (Noctalia) |
 | **`Mod+E`** | Open File Manager (Nautilus) |
-| **`Mod+T`** | Open Terminal (Alacritty) |
-| **`Mod+B`** | Open Browser (Firefox) |
+| **`Mod+Enter`** / **`Ctrl+Alt+T`** | Open Terminal (Alacritty) |
+| **`Mod+B`** | Open Browser (Helium) |
 | **`Ctrl+Shift+Escape`** | Task Manager (btop) |
 | **`Mod+P`** / **`XF86Display`** | Displays (nwg-displays) |
 | **`Mod+L`** | Lock Screen (swaylock) |
@@ -38,8 +39,6 @@ This setup uses a combination of "Windows-familiar" shortcuts and intelligent ti
 | **`Alt+F4`** / **`Mod+Q`** | Close active window |
 | **`F11`** / **`Mod+Shift+F`** | Fullscreen window |
 | **`Mod+D`** | Toggle Overview (Show Desktop) |
-| **`Alt+Tab`** | Focus next column (right) |
-| **`Alt+Shift+Tab`** | Focus previous column (left) |
 | **`Mod+T`** | Toggle window floating |
 | **`Mod+W`** | Toggle column tabbed display |
 
@@ -47,11 +46,10 @@ This setup uses a combination of "Windows-familiar" shortcuts and intelligent ti
 
 | Shortcut | Action |
 | :--- | :--- |
-| **`Mod+Left/Right/H/L`** | Focus column left/right |
-| **`Mod+Up`** | Maximize column |
-| **`Mod+Down/J/K`** | Focus window down/up |
-| **`Mod+Ctrl+Left/Right/H/L`** | Move column left/right |
-| **`Ctrl+Alt+Left/Right`** | Move column left/right |
+| **`Mod+Left/Right/H/L`** / **`Alt(+Shift)+Tab`** | Focus column left/right |
+| **`Mod+Up/Down/J/K`** | Focus window up/down |
+| **`Mod+M`** | Maximize column |
+| **`Mod+Ctrl+Left/Right/H/L`** / **`Ctrl+Alt+Left/Right`** | Move column left/right |
 | **`Mod+Ctrl+Up/Down/J/K`** | Move window up/down |
 | **`Mod+Home/End`** | Focus first/last column |
 | **`Mod+Ctrl+Home/End`** | Move column to first/last position |
@@ -101,7 +99,7 @@ This setup uses a combination of "Windows-familiar" shortcuts and intelligent ti
 
 ```bash
 # 1. Clone the repository with submodules
-git clone --recurse-submodules https://github.com/j0x/My-Arch-Setup-Configs.git ~/.dotfiles
+git clone --recurse-submodules https://github.com/John-Varghese-EH/J0X-Arch-Setup-Configs.git ~/.dotfiles
 cd ~/.dotfiles
 
 # (If you already cloned it without submodules, run this instead:)
