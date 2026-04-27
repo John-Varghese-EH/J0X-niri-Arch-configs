@@ -51,7 +51,7 @@ binds {
     Mod+K                               { focus-window-up; }
     Mod+Down                            { focus-window-down; }
     Mod+J                               { focus-window-down; }
-    Mod+M                               { maximize-column; }
+    Mod+F                               { maximize-column; }
 
     Mod+CTRL+Left                       { move-column-left; }
     Mod+CTRL+H                          { move-column-left; }

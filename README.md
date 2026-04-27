@@ -48,7 +48,7 @@ This setup uses a combination of "Windows-familiar" shortcuts and intelligent ti
 | :--- | :--- |
 | **`Mod+Left/Right/H/L`** / **`Alt(+Shift)+Tab`** | Focus column left/right |
 | **`Mod+Up/Down/J/K`** | Focus window up/down |
-| **`Mod+M`** | Maximize column |
+| **`Mod+F`** | Maximize column |
 | **`Mod+Ctrl+Left/Right/H/L`** / **`Ctrl+Alt+Left/Right`** | Move column left/right |
 | **`Mod+Ctrl+Up/Down/J/K`** | Move window up/down |
 | **`Mod+Home/End`** | Focus first/last column |
