@@ -27,7 +27,10 @@
             "github-desktop",
             "torbrowser",
             "org.gnome.Nautilus",
-            "Alacritty"
+            "Alacritty",
+            "com.shellyorg.shelly",
+            "brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default",
+            "brave-agimnkijcaahngcdmfeangaknmldooml-Default"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -141,10 +144,10 @@
                 {
                     "clockColor": "none",
                     "customFont": "",
-                    "formatHorizontal": "HH:mm ddd, MMM dd",
-                    "formatVertical": "HH mm - dd MM",
+                    "formatHorizontal": "h:mm AP ddd, MMM dd",
+                    "formatVertical": "hh mm AP - dd MM",
                     "id": "Clock",
-                    "tooltipFormat": "HH:mm ddd, MMM dd",
+                    "tooltipFormat": "h:mm AP ddd, MMM dd",
                     "useCustomFont": false
                 },
                 {
@@ -521,6 +524,9 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
+            "brave-browser",
+            "org.gnome.Nautilus",
+            "Alacritty"
         ],
         "pinnedStatic": true,
         "position": "bottom",
@@ -533,14 +539,14 @@
         "allowPanelsOnScreenWithoutBar": true,
         "allowPasswordWithFprintd": true,
         "animationDisabled": false,
-        "animationSpeed": 1,
+        "animationSpeed": 1.5,
         "autoStartAuth": true,
         "avatarImage": "/home/j0x/Pictures/profile.jpg",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
         "clockStyle": "custom",
         "compactLockScreen": false,
-        "dimmerOpacity": 0.19,
+        "dimmerOpacity": 0.2,
         "enableBlurBehind": true,
         "enableLockScreenCountdown": true,
         "enableLockScreenMediaControls": true,
@@ -814,7 +820,7 @@
         "fontDefaultScale": 0.97,
         "fontFixed": "monospace",
         "fontFixedScale": 1,
-        "panelBackgroundOpacity": 0.93,
+        "panelBackgroundOpacity": 0.52,
         "panelsAttachedToBar": true,
         "scrollbarAlwaysVisible": false,
         "settingsPanelMode": "attached",

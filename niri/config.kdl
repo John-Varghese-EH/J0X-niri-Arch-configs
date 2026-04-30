@@ -276,6 +276,8 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 
+spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+
 spawn-at-startup "niri-float-sticky" "-title" "Picture-in-Picture" "-title" "Picture in picture"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -343,7 +345,7 @@ window-rule {
 window-rule {
     match title="^Picture-in-Picture$"
     match title="^Picture in picture$"
-    match app-id="^helium$"
+    match app-id="^brave$"
 
     open-floating true
 }
@@ -435,7 +437,7 @@ binds {
     Mod+E hotkey-overlay-title="File Manager: nautilus" { spawn "nautilus"; }
     Mod+R hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Alt+Space hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+B hotkey-overlay-title="Open Browser: helium" { spawn "helium"; }
+    Mod+B hotkey-overlay-title="Open Browser: brave" { spawn "brave"; }
     Mod+Shift+Q hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -631,7 +633,7 @@ binds {
     Mod+Alt+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
 
-    Mod+M { maximize-column; }
+    Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     F11 { fullscreen-window; }
 
