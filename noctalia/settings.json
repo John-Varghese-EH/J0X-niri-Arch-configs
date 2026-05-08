@@ -30,7 +30,9 @@
             "Alacritty",
             "com.shellyorg.shelly",
             "brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default",
-            "brave-agimnkijcaahngcdmfeangaknmldooml-Default"
+            "brave-agimnkijcaahngcdmfeangaknmldooml-Default",
+            "waydroid.com.instagram.android",
+            "com.blackmagicdesign.resolve"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -55,7 +57,7 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0.58,
+        "backgroundOpacity": 0.64,
         "barType": "floating",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
@@ -66,7 +68,7 @@
         "fontScale": 1,
         "frameRadius": 12,
         "frameThickness": 8,
-        "hideOnOverview": true,
+        "hideOnOverview": false,
         "marginHorizontal": 4,
         "marginVertical": 4,
         "middleClickAction": "settings",
@@ -74,7 +76,7 @@
         "middleClickFollowMouse": false,
         "monitors": [
         ],
-        "mouseWheelAction": "volume",
+        "mouseWheelAction": "content",
         "mouseWheelWrap": true,
         "outerCorners": true,
         "position": "top",
@@ -151,7 +153,7 @@
                     "useCustomFont": false
                 },
                 {
-                    "colorizeIcons": true,
+                    "colorizeIcons": false,
                     "hideMode": "hidden",
                     "id": "ActiveWindow",
                     "maxWidth": 145,
@@ -206,18 +208,6 @@
                     "width": 1
                 },
                 {
-                    "blacklist": [
-                    ],
-                    "chevronColor": "none",
-                    "colorizeIcons": false,
-                    "drawerEnabled": true,
-                    "hidePassive": false,
-                    "id": "Tray",
-                    "pinned": [
-                        "proton.vpn.app.gtk"
-                    ]
-                },
-                {
                     "defaultSettings": {
                         "audioCodec": "opus",
                         "audioSource": "default_output",
@@ -243,6 +233,17 @@
                 },
                 {
                     "defaultSettings": {
+                        "autoStartBreaks": false,
+                        "autoStartWork": false,
+                        "longBreakDuration": 15,
+                        "sessionsBeforeLongBreak": 4,
+                        "shortBreakDuration": 5,
+                        "workDuration": 25
+                    },
+                    "id": "plugin:pomodoro"
+                },
+                {
+                    "defaultSettings": {
                         "autoMount": true,
                         "fileBrowser": "nautilus",
                         "hideWhenEmpty": true,
@@ -254,15 +255,16 @@
                     "id": "plugin:usb-drive-manager"
                 },
                 {
-                    "defaultSettings": {
-                        "autoStartBreaks": false,
-                        "autoStartWork": false,
-                        "longBreakDuration": 15,
-                        "sessionsBeforeLongBreak": 4,
-                        "shortBreakDuration": 5,
-                        "workDuration": 25
-                    },
-                    "id": "plugin:pomodoro"
+                    "blacklist": [
+                    ],
+                    "chevronColor": "none",
+                    "colorizeIcons": false,
+                    "drawerEnabled": true,
+                    "hidePassive": false,
+                    "id": "Tray",
+                    "pinned": [
+                        "proton.vpn.app.gtk"
+                    ]
                 },
                 {
                     "hideWhenZero": false,
@@ -271,15 +273,6 @@
                     "id": "NotificationHistory",
                     "showUnreadBadge": true,
                     "unreadBadgeColor": "primary"
-                },
-                {
-                    "deviceNativePath": "__default__",
-                    "displayMode": "icon-always",
-                    "hideIfIdle": false,
-                    "hideIfNotDetected": true,
-                    "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
                 },
                 {
                     "displayMode": "onhover",
@@ -294,6 +287,15 @@
                     "iconColor": "none",
                     "id": "Brightness",
                     "textColor": "none"
+                },
+                {
+                    "deviceNativePath": "__default__",
+                    "displayMode": "icon-always",
+                    "hideIfIdle": false,
+                    "hideIfNotDetected": true,
+                    "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": false
                 },
                 {
                     "colorizeDistroLogo": false,
@@ -401,6 +403,11 @@
                 },
                 {
                     "id": "NoctaliaPerformance"
+                },
+                {
+                    "defaultSettings": {
+                    },
+                    "id": "plugin:mirror-mirror"
                 }
             ],
             "right": [
@@ -437,8 +444,8 @@
                         "scale": 2.3915640482882132,
                         "showBackground": false,
                         "useCustomFont": true,
-                        "x": 1197,
-                        "y": 92
+                        "x": 1610,
+                        "y": 99
                     },
                     {
                         "hideMode": "visible",
@@ -450,8 +457,8 @@
                         "showButtons": true,
                         "showVisualizer": true,
                         "visualizerType": "linear",
-                        "x": 1185,
-                        "y": 745
+                        "x": 1564,
+                        "y": 945
                     }
                 ]
             },
@@ -651,13 +658,13 @@
         "bluetoothRssiPollIntervalMs": 60000,
         "bluetoothRssiPollingEnabled": false,
         "disableDiscoverability": false,
-        "networkPanelView": "wifi",
+        "networkPanelView": "ethernet",
         "wifiDetailsViewMode": "grid"
     },
     "nightLight": {
         "autoSchedule": true,
         "dayTemp": "6357",
-        "enabled": true,
+        "enabled": false,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
@@ -711,6 +718,8 @@
         ],
         "location": "top_right",
         "monitors": [
+            "HDMI-A-1",
+            "eDP-1"
         ],
         "overlayLayer": true
     },
@@ -817,7 +826,7 @@
     "ui": {
         "boxBorderEnabled": true,
         "fontDefault": "Adwaita Sans",
-        "fontDefaultScale": 0.97,
+        "fontDefaultScale": 1.05,
         "fontFixed": "monospace",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.52,
@@ -841,9 +850,9 @@
         "linkLightAndDarkWallpapers": true,
         "monitorDirectories": [
         ],
-        "overviewBlur": 0.4,
+        "overviewBlur": 0.56,
         "overviewEnabled": false,
-        "overviewTint": 0.6,
+        "overviewTint": 0.68,
         "panelPosition": "follow_bar",
         "randomIntervalSec": 1800,
         "setWallpaperOnAllMonitors": false,

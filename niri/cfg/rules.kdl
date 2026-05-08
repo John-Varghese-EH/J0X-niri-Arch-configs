@@ -1,22 +1,116 @@
     window-rule {
-        geometry-corner-radius 20 // Set every window radius to 20
+        geometry-corner-radius 14 // Set every window radius to 20
         clip-to-geometry true
-    }
+}
 
      // if you use steam you will probably like these
     window-rule {
         match app-id="steam"
-        exclude title=r#"^[Ss]team$"#
+        exclude title=r"^[Ss]team$"
         open-floating true
-    }
+}
 
     window-rule {
-       match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+       match app-id="steam" title=r"^notificationtoasts_\d+_desktop$"
        default-floating-position x=10 y=10 relative-to="bottom-right"
        open-focused false
-    }
+}
 
     layer-rule {
         match namespace="^noctalia-wallpaper*"
         place-within-backdrop true
+}
+
+    // Floating dialogs
+    window-rule {
+        match is-floating=true
+        open-floating true
+    }
+
+    window-rule {
+        match title="^Open File$"
+        match title="^Save File$"
+        open-floating true
+    }
+
+    // Picture in Picture
+    window-rule {
+        match title="^Picture-in-Picture$"
+        match title="^Picture in picture$"
+        match app-id="^brave$"
+        open-floating true
+    }
+
+    window-rule {
+        match title=r"(?i)picture[- ]in[- ]picture"
+        open-floating true
+        default-floating-position x=32 y=32 relative-to="bottom-right"
+    }
+
+    // GNOME Sushi previewer
+    window-rule {
+        match app-id="org.gnome.NautilusPreviewer"
+        open-floating true
+        default-column-width { proportion 0.5; }
+        default-window-height { proportion 0.7; }
+        draw-border-with-background false
+    }
+
+    // WezTerm configure bug fix
+    window-rule {
+        match app-id=r"^org\.wezfurlong\.wezterm$"
+        default-column-width 
+    }
+
+    // Zed Editor
+    window-rule {
+        match title="Zed"
+        default-column-width { proportion 0.75; }
+        open-on-workspace "coding"
+    }
+
+    // Wine apps
+    window-rule {
+        match app-id="wine"
+        open-floating true
+    }
+
+    // Emoji Picker (Smile) - Always transparent even when focused
+    window-rule {
+        match app-id="smile"
+        match app-id="it.mijorus.smile"
+        open-floating true
+        opacity 0.8
+    }
+
+    // Fuzzel App Launcher transparency
+    window-rule {
+        match app-id="fuzzel"
+        opacity 0.8
+    }
+
+    // Fuzzel layer rule for blur
+    layer-rule {
+        match namespace="fuzzel"
+        background-effect {
+            blur true
+        }
+    }
+
+    // All normal windows transparent/blurred
+    window-rule {
+        // This applies to all windows (no match block = match all)
+        opacity 0.8
+        
+        background-effect {
+            blur true
+            // noise 0.02     // Adds a subtle grain (looks more premium)
+            // saturation 1.1 // Slightly boosts colors behind the glass
+        }
+    }
+
+    // Ensure the active window is almost opaque for clarity
+    window-rule {
+        match is-active=true
+        opacity 0.99
     }

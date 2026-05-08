@@ -2,3 +2,8 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
     spawn-sh-at-startup "qs -c noctalia-shell"
+    spawn-at-startup "waybar"
+    spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+    spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+    spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+    spawn-at-startup "niri-float-sticky" "-title" "Picture-in-Picture" "-title" "Picture in picture"
