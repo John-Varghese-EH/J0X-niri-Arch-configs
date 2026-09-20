@@ -1,4 +1,4 @@
-name: Validate Configs
+name: Continuous Integration
 
 on:
   push:
@@ -6,36 +6,66 @@ on:
   pull_request:
     branches: [ "main" ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  validate:
+  lint-scripts:
+    name: Lint Shell Scripts
     runs-on: ubuntu-latest
-    container: archlinux:latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Update system and install dependencies
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './'
+          format: gcc
+          severity: style
+
+  lint-markdown:
+    name: Lint Markdown Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Markdown Lint
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: "**/*.md"
+        continue-on-error: true
+
+  validate-configs:
+    name: Validate System Configurations
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Initialize Build Environment
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm niri shellcheck npm git make gcc
-          # keyd is not in the official Arch repos, so build from source if pacman fails
-          pacman -S --noconfirm keyd || (git clone https://github.com/rvaiya/keyd /tmp/keyd && cd /tmp/keyd && make && make install)
+          pacman -S --noconfirm --needed git make gcc base-devel
 
-      - name: Validate Niri config
+      - name: Validate Niri Compositor Config
         run: |
+          pacman -S --noconfirm niri
+          echo "::group::Niri Validation Output"
           mkdir -p /tmp/niri-val
           cp -r niri/* /tmp/niri-val/
           niri validate -c /tmp/niri-val/config.kdl
+          echo "::endgroup::"
 
-      - name: Validate Keyd config
+      - name: Validate Keyd Remapping Config
         run: |
+          echo "::group::Building Keyd from Source"
+          pacman -S --noconfirm keyd || (git clone https://github.com/rvaiya/keyd /tmp/keyd && cd /tmp/keyd && make && make install)
+          echo "::endgroup::"
+          echo "::group::Keyd Validation Output"
           keyd check keyd/default.conf
-
-      - name: Lint install.sh
-        run: |
-          shellcheck install.sh
-
-      - name: Lint Markdown
-        continue-on-error: true
-        run: |
-          npx markdownlint-cli README.md KEYBINDS.md || true
+          echo "::endgroup::"

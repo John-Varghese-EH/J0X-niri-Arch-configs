@@ -49,13 +49,14 @@ trap 'FAILED_CMDS+=("Line $LINENO: $BASH_COMMAND"); ((ERRORS++)) || true' ERR
 # ─────────────────────── Constants ───────────────────────
 
 readonly VERSION="2.0.0"
-readonly SCRIPT_NAME="$(basename "$0")"
-readonly DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly BACKUP_DIR="$HOME/.local/share/j0x-dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
-readonly LOG_FILE="/tmp/j0x-dotfiles-install-$(date +%Y%m%d-%H%M%S).log"
+SCRIPT_NAME="$(basename "$0")"; readonly SCRIPT_NAME
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; readonly DOTFILES_DIR
+BACKUP_DIR="$HOME/.local/share/j0x-dotfiles-backups/$(date +%Y%m%d-%H%M%S)"; readonly BACKUP_DIR
+LOG_FILE="/tmp/j0x-dotfiles-install-$(date +%Y%m%d-%H%M%S).log"; readonly LOG_FILE
 
 # ─────────────────────── Color Palette ───────────────────────
 
+# shellcheck disable=SC2034
 if [[ -t 1 ]]; then
     readonly RESET='\033[0m'
     readonly BOLD='\033[1m'
@@ -201,6 +202,7 @@ parse_args() {
             --dry-run)        DRY_RUN=true ;;
             --install-deps)   INSTALL_DEPS=true ;;
             --uninstall)      UNINSTALL=true ;;
+# shellcheck disable=SC2034
             --verbose)        VERBOSE=true ;;
             --skip-checks)    SKIP_CHECKS=true ;;
             -v|--version)     echo "J0X Dotfiles Installer v${VERSION}"; exit 0 ;;
@@ -263,6 +265,7 @@ check_environment() {
 
     # ── Check OS ──
     if [[ -f /etc/os-release ]]; then
+        # shellcheck source=/dev/null
         source /etc/os-release
         if [[ "${ID_LIKE:-$ID}" == *arch* || "${ID:-}" == *cachyos* || "${ID:-}" == *arch* ]]; then
             success "Detected: ${BOLD}${NAME:-Arch Linux}${RESET} (Arch-based)"
@@ -447,7 +450,7 @@ install_dependencies() {
     fi
 
     info "Installing packages (sudo password may be required)..."
-    if sudo pacman -S --needed --noconfirm "${to_install[@]}" >> "$LOG_FILE" 2>&1; then
+    if sudo pacman -S --needed --noconfirm "${to_install[@]}" 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
         success "All packages installed successfully!"
     else
         error "Some packages failed to install. Check log: $LOG_FILE"
@@ -467,9 +470,11 @@ configure_installed_tools() {
         substep "${BOLD}keyd${RESET} — kernel-level key remapper"
         if ! systemctl is-enabled --quiet keyd 2>/dev/null; then
             info "Enabling keyd.service..."
-            sudo systemctl enable --now keyd >> "$LOG_FILE" 2>&1 && \
-                success "keyd.service enabled and started." || \
+            if sudo systemctl enable --now keyd 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
+                success "keyd.service enabled and started."
+            else
                 warn "Could not enable keyd. Run: sudo systemctl enable --now keyd"
+            fi
         else
             success "keyd.service is already enabled."
         fi
@@ -487,18 +492,22 @@ configure_installed_tools() {
             if [[ "$DRY_RUN" == true ]]; then
                 dry "Would run: sudo usermod -aG input $USER"
             else
-                sudo usermod -aG input "$USER" >> "$LOG_FILE" 2>&1 && \
-                    success "Added $USER to 'input' group. ${YELLOW}Log out and back in for this to take effect.${RESET}" || \
+                if sudo usermod -aG input "$USER" 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
+                    success "Added $USER to 'input' group. ${YELLOW}Log out and back in for this to take effect.${RESET}"
+                else
                     warn "Could not add user to input group."
+                fi
             fi
         fi
 
         # Enable the user-level ydotool service
         if ! systemctl --user is-enabled --quiet ydotool 2>/dev/null; then
             info "Enabling ydotool.service (user)..."
-            systemctl --user enable --now ydotool >> "$LOG_FILE" 2>&1 && \
-                success "ydotool.service (user) enabled and started." || \
+            if systemctl --user enable --now ydotool 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
+                success "ydotool.service (user) enabled and started."
+            else
                 warn "Could not enable ydotool. Run: systemctl --user enable --now ydotool"
+            fi
         else
             success "ydotool.service (user) is already enabled."
         fi
@@ -527,9 +536,11 @@ configure_installed_tools() {
             if [[ "$DRY_RUN" == true ]]; then
                 dry "Would run: sudo usermod -aG video $USER"
             else
-                sudo usermod -aG video "$USER" >> "$LOG_FILE" 2>&1 && \
-                    success "Added $USER to 'video' group." || \
+                if sudo usermod -aG video "$USER" 2>&1 | tee -a "$LOG_FILE" >/dev/null; then
+                    success "Added $USER to 'video' group."
+                else
                     warn "Could not add user to video group."
+                fi
             fi
         fi
     fi
@@ -580,7 +591,8 @@ link_config() {
     local source_name="$1"
     local target_parent="$2"
     local source_path="$DOTFILES_DIR/$source_name"
-    local target_path="$target_parent/$(basename "$source_name")"
+    local target_path
+    target_path="$target_parent/$(basename "$source_name")"
 
     if [[ ! -e "$source_path" ]]; then
         warn "Source does not exist: $source_path — Skipping."
@@ -592,7 +604,7 @@ link_config() {
         if [[ -e "$target_path" || -L "$target_path" ]]; then
             dry "Would backup existing: $target_path → $BACKUP_DIR/"
         fi
-        ((CHANGES++))
+        ((CHANGES++)) || true
         return 0
     fi
 
@@ -609,7 +621,7 @@ link_config() {
 
     ln -s "$source_path" "$target_path"
     success "Linked: ${BOLD}$source_name${RESET} → ${DIM}$target_path${RESET}"
-    ((CHANGES++))
+    ((CHANGES++)) || true
 }
 
 customize_configs() {
@@ -655,6 +667,17 @@ install_niri() {
     step "Installing Niri Configuration"
     substep "Target: ${DIM}~/.config/niri/${RESET}"
     link_config "niri" "$HOME/.config"
+    
+    if command_exists niri; then
+        substep "Validating Niri config..."
+        echo ""
+        if niri validate -c "$HOME/.config/niri/config.kdl"; then
+            success "Niri config is valid!"
+        else
+            warn "Niri config validation failed! Please check syntax."
+        fi
+        echo ""
+    fi
 }
 
 install_noctalia() {
@@ -670,7 +693,7 @@ install_keyd() {
     if [[ "$DRY_RUN" == true ]]; then
         dry "Would copy keyd/default.conf → /etc/keyd/default.conf (requires sudo)"
         dry "Would restart keyd service"
-        ((CHANGES++))
+        ((CHANGES++)) || true
         return 0
     fi
 
@@ -696,12 +719,16 @@ install_keyd() {
 
     sudo cp "$DOTFILES_DIR/keyd/default.conf" /etc/keyd/default.conf
     success "Installed keyd config → ${DIM}/etc/keyd/default.conf${RESET}"
-    ((CHANGES++))
+    ((CHANGES++)) || true
 
     # Restart keyd if running
     if systemctl is-active --quiet keyd 2>/dev/null; then
         substep "Restarting keyd service..."
-        sudo systemctl restart keyd && success "Keyd service restarted." || warn "Failed to restart keyd."
+        if sudo systemctl restart keyd; then
+            success "Keyd service restarted."
+        else
+            warn "Failed to restart keyd."
+        fi
     else
         warn "Keyd service is not running. Enable it with: ${BOLD}sudo systemctl enable --now keyd${RESET}"
     fi
@@ -847,6 +874,7 @@ do_uninstall() {
     local backup_base="$HOME/.local/share/j0x-dotfiles-backups"
     if [[ -d "$backup_base" ]]; then
         local latest_backup
+        # shellcheck disable=SC2012
         latest_backup=$(ls -1d "$backup_base"/*/ 2>/dev/null | tail -1)
         if [[ -n "$latest_backup" ]]; then
             info "Latest backup found: ${DIM}$latest_backup${RESET}"
@@ -910,13 +938,13 @@ interactive_menu() {
         echo ""
 
         echo -ne "  Terminal ${DIM}[$TERMINAL]${RESET}: "
-        read -r input; [[ -n "$input" ]] && TERMINAL="$input"
+        read -r input; [[ -z "$input" ]] || TERMINAL="$input"
 
         echo -ne "  Browser  ${DIM}[$BROWSER]${RESET}: "
-        read -r input; [[ -n "$input" ]] && BROWSER="$input"
+        read -r input; [[ -z "$input" ]] || BROWSER="$input"
 
         echo -ne "  File Mgr ${DIM}[$FILE_MANAGER]${RESET}: "
-        read -r input; [[ -n "$input" ]] && FILE_MANAGER="$input"
+        read -r input; [[ -z "$input" ]] || FILE_MANAGER="$input"
     fi
 }
 

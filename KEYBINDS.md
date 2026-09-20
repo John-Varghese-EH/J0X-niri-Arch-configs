@@ -133,17 +133,24 @@ The following table maps each shortcut to its identical Windows counterpart, so 
 | Shortcut | Action | Windows Equivalent | Powered By |
 |---|---|---|---|
 | `Win + E` | Open File Explorer | Win + E (Explorer) | Nautilus |
+| `Win + I` | System Settings | Win + I (Settings) | GNOME Control Center |
+| `Win + A` | Action Center / Notifications | Win + A (Action Center) | Noctalia Shell |
+| `Win + S` | Search / App Launcher | Win + S (Search) | Noctalia Shell |
 | `Win + R` | Application Launcher | Win + R (Run Dialog) | Noctalia Shell |
 | `Win + L` | Lock Screen | Win + L (Lock) | Noctalia Shell |
 | `Win + X` | Power / Session Menu | Win + X (Quick Link Menu) | Noctalia Shell |
 | `Win + P` | Display Configuration | Win + P (Project / Display) | Wdisplays |
+| `Win + H` | Hide Window | Cmd + H (Hide App) | Niri Native |
+| `Win + G` | System Monitor (Game Bar) | Win + G (Xbox Game Bar) | Mission Center |
 | `Win + V` | Clipboard History | Win + V (Clipboard History) | Fuzzel + Cliphist |
 | `Win + .` | Emoji Picker | Win + . (Emoji Panel) | Smile |
+| `Win + Shift + A` | Toggle Caffeine (Keep Awake) | PowerToys Awake | Niri / Systemd |
 | `Win + Shift + S` | Area Screenshot | Win + Shift + S (Snipping Tool) | Niri Native |
 | `Alt + F4` | Close Active Window | Alt + F4 (Close Window) | Niri Native |
 | `Alt + Tab` | Switch Windows Forward | Alt + Tab (Task Switcher) | Niri Native |
 | `Alt + Shift + Tab` | Switch Windows Backward | Alt + Shift + Tab (Reverse Switcher) | Niri Native |
 | `Ctrl + Shift + Esc` | Task Manager | Ctrl + Shift + Esc (Task Manager) | Alacritty + Btop |
+| `Ctrl + Alt + Escape` | Force Kill Frozen App | Cmd + Option + Esc (macOS Force Quit) | Niri Native + jq |
 | `Ctrl + Alt + Delete` | Emergency Session Exit | Ctrl + Alt + Delete (Security Options) | Niri Native |
 | `Win + D` | Show Desktop / Overview | Win + D (Show Desktop) | Niri Native |
 | `Win + Up` | Maximize Window | Win + Up (Maximize) | Niri Native |
@@ -322,9 +329,14 @@ The most frequently used shortcuts, consolidated for rapid scanning:
 |---|---|
 | Open terminal | `Ctrl + Alt + T` |
 | Open file explorer | `Win + E` |
-| Launch application | `Win + R` or `Alt + Space` |
+| System settings | `Win + I` |
+| Action center | `Win + A` |
+| Search / Launch | `Win + S` or `Win + R` |
+| Hide window | `Win + H` |
 | Close window | `Alt + F4` or `Win + Q` |
+| Force Kill App | `Ctrl + Alt + Escape` |
 | Lock screen | `Win + L` |
+| Toggle Caffeine | `Win + Shift + A` |
 | Screenshot (area) | `Win + Shift + S` |
 | Clipboard history | `Win + V` |
 | Task manager | `Ctrl + Shift + Esc` |

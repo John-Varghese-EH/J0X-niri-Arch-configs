@@ -25,6 +25,12 @@ binds {
     // Windows Style: Task Manager (Ctrl+Shift+Esc)
     Ctrl+Shift+Escape hotkey-overlay-title="Task Manager (btop)" { spawn "alacritty" "-e" "btop"; }
     
+    // macOS Style: Force Quit Active Application (Cmd+Option+Esc equivalent)
+    Ctrl+Alt+Escape hotkey-overlay-title="Force Kill Frozen App" { spawn "sh" "-c" "kill -9 $(niri msg -j focused-window | jq .pid)"; }
+    
+    // Windows PowerToys Style: Caffeine / Keep-Awake Toggle
+    Mod+Shift+A hotkey-overlay-title="Toggle Caffeine (Keep Awake)" { spawn "sh" "-c" "~/.config/niri/scripts/caffeine.sh"; }
+    
     // Niri Specific Utilities
     Mod+Alt+O hotkey-overlay-title="Toggle Window Opacity" { toggle-window-rule-opacity; }
     Mod+Shift+W hotkey-overlay-title="Reload Waybar" { spawn "pkill" "-USR2" "waybar"; }
@@ -38,18 +44,18 @@ binds {
     // Mod + Alt + P for a Power & Thermal dashboard
     Mod+ALT+P { spawn "alacritty" "-e" "watch" "-n" "1" "nvidia-smi; sensors; cat /sys/class/power_supply/BAT0/power_now"; }
 
-    // Emergency Exit
+    // Emergency Exit (Graceful Niri Quit)
     CTRL+ALT+Delete { quit; }
+    Mod+Shift+E { quit; }
 
     // ────────────── APPLICATIONS ──────────────
     
     // Windows Style: Win+E for Explorer
-    Mod+E hotkey-overlay-title="File Explorer (Nautilus)" { spawn "nautilus"; }
-    Mod+Shift+E { spawn "nautilus"; }
+    Mod+E hotkey-overlay-title="File Explorer (nautilus)" { spawn "nautilus"; }
     
     // Windows Style: Win+Return or Ctrl+Alt+T for Terminal
-    Mod+Return hotkey-overlay-title="Terminal (Alacritty)" { spawn "alacritty"; }
-    Ctrl+Alt+T hotkey-overlay-title="Terminal (Alacritty)" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Terminal (alacritty)" { spawn "alacritty"; }
+    Ctrl+Alt+T hotkey-overlay-title="Terminal (alacritty)" { spawn "alacritty"; }
     
     // Windows Style: Win+V for Clipboard
     Mod+V hotkey-overlay-title="Clipboard History (Fuzzel)" { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
@@ -61,6 +67,18 @@ binds {
     Mod+R hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+Space hotkey-overlay-title="Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     ALT+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    
+    // Windows Style: Win+S for Search (maps to Launcher)
+    Mod+S hotkey-overlay-title="Search" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    
+    // Windows Style: Win+I for Settings
+    Mod+I hotkey-overlay-title="Settings" { spawn "gnome-control-center"; }
+    
+    // Windows Style: Win+A for Action Center (Notifications)
+    Mod+A hotkey-overlay-title="Action Center" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "toggle"; }
+    
+    // Windows Style: Win+G for Game Bar (Mission Center for CachyOS)
+    Mod+G hotkey-overlay-title="System Monitor" { spawn "missioncenter"; }
     
     // Web Browser
     Mod+B hotkey-overlay-title="Web Browser (Brave)" { spawn "brave"; }
@@ -118,7 +136,7 @@ binds {
     ALT+F4 { close-window; }
     
     // Vim-style Navigation (Restored where possible)
-    Mod+H { focus-column-left; }
+    Mod+H hotkey-overlay-title="Hide Window (macOS Style)" { consume-window-into-column; }
     Mod+J { focus-window-down; }
     Mod+K { focus-window-up; }
     // Mod+L is Lock!
@@ -137,7 +155,7 @@ binds {
     Mod+Page_Down { focus-workspace-down; }
     Mod+Page_Up { focus-workspace-up; }
     Mod+U { focus-workspace-down; }
-    Mod+I { focus-workspace-up; }
+    // Mod+I is used for Settings
     
     // Mouse Scroll (Win+Scroll)
     Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
@@ -212,7 +230,8 @@ binds {
     
     Mod+BracketLeft { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
-    Mod+Comma { consume-window-into-column; }
+    Mod+Comma hotkey-overlay-title="Unhide Window" { expel-window-from-column; }
+    // Mod+Period is used for Emoji Picker
     
     Mod+Shift+R { switch-preset-column-width; }
     Mod+Alt+R { switch-preset-window-height; }
