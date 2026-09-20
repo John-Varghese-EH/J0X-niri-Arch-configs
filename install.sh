@@ -12,8 +12,8 @@
 # ║                 Niri · Noctalia · Keyd · Ydotool                  ║
 # ║                                                                   ║
 # ║                 Created by: John Varghese (J0X)                   ║
-# ║               LinkedIn: /in/John--Varghese/                       ║
-# ║               GitHub: John-Varghese-EH                            ║
+# ║                  LinkedIn: /in/John--Varghese/                    ║
+# ║                  GitHub: John-Varghese-EH                         ║
 # ║                                                                   ║
 # ╚═══════════════════════════════════════════════════════════════════╝
 #
@@ -29,7 +29,11 @@
 # REQUIREMENTS: Arch Linux / CachyOS · Niri compositor · Wayland session
 # LICENSE: GPL-3.0 — See LICENSE file for details.
 
-set -euo pipefail
+set -Euo pipefail
+
+# ─────────────────────── Error Handling ──────────────────────
+FAILED_CMDS=()
+trap 'FAILED_CMDS+=("Line $LINENO: $BASH_COMMAND"); ((ERRORS++)) || true' ERR
 
 # ─────────────────────── Constants ───────────────────────
 
@@ -94,22 +98,31 @@ log() { echo "[$(date +%H:%M:%S)] $*" >> "$LOG_FILE"; }
 print_header() {
     echo ""
     echo -e "${MAGENTA}${BOLD}"
-    echo "  ╔══════════════════════════════════════════════════════════════╗"
-    echo "  ║                                                            ║"
-    echo "  ║        ⚡  J0X Ultimate Arch Setup  ⚡                     ║"
-    echo "  ║                                                            ║"
-    echo "  ║   The #1 Niri + Keyd Configuration for Dual Booters        ║"
-    echo "  ║                                                            ║"
-    echo "  ╚══════════════════════════════════════════════════════════════╝"
+    echo "  ╔═══════════════════════════════════════════════════════════════════╗"
+    echo "  ║                                                                   ║"
+    echo "  ║       ██╗ ██████╗ ██╗  ██╗    ██████╗  ██████╗ ████████╗███████╗  ║"
+    echo "  ║       ██║██╔═══██╗╚██╗██╔╝    ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝  ║"
+    echo "  ║       ██║██║   ██║ ╚███╔╝     ██║  ██║██║   ██║   ██║   ███████╗  ║"
+    echo "  ║  ██   ██║██║   ██║ ██╔██╗     ██║  ██║██║   ██║   ██║   ╚════██║  ║"
+    echo "  ║  ╚█████╔╝╚██████╔╝██╔╝ ██╗    ██████╔╝╚██████╔╝   ██║   ███████║  ║"
+    echo "  ║   ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝  ║"
+    echo "  ║                                                                   ║"
+    echo "  ║      The Ultimate Arch Linux Setup for Windows Dual Booters       ║"
+    echo "  ║                 Niri · Noctalia · Keyd · Ydotool                  ║"
+    echo "  ║                                                                   ║"
+    echo "  ║                 Created by: John Varghese (J0X)                   ║"
+    echo "  ║                  LinkedIn: /in/John--Varghese/                    ║"
+    echo "  ║                  GitHub: John-Varghese-EH                         ║"
+    echo "  ║                                                                   ║"
+    echo "  ╚═══════════════════════════════════════════════════════════════════╝"
     echo -e "${RESET}"
-    echo -e "  ${DIM}Version ${VERSION} · github.com/John-Varghese-EH${RESET}"
     echo ""
 }
 
 info()    { echo -e "  ${CYAN}●${RESET} $*"; log "INFO: $*"; }
 success() { echo -e "  ${GREEN}✔${RESET} $*"; log "SUCCESS: $*"; }
-warn()    { echo -e "  ${YELLOW}⚠${RESET} ${YELLOW}$*${RESET}"; log "WARN: $*"; ((WARNINGS++)); }
-error()   { echo -e "  ${RED}✖${RESET} ${RED}$*${RESET}"; log "ERROR: $*"; ((ERRORS++)); }
+warn()    { echo -e "  ${YELLOW}⚠${RESET} ${YELLOW}$*${RESET}"; log "WARN: $*"; ((WARNINGS++)) || true; }
+error()   { echo -e "  ${RED}✖${RESET} ${RED}$*${RESET}"; log "ERROR: $*"; ((ERRORS++)) || true; }
 fatal()   { echo -e "\n  ${BG_RED}${WHITE}${BOLD} FATAL ${RESET} ${RED}$*${RESET}\n"; log "FATAL: $*"; exit 1; }
 step()    { echo -e "\n  ${BLUE}${BOLD}▸ $*${RESET}"; log "STEP: $*"; }
 substep() { echo -e "    ${DIM}→${RESET} $*"; log "  $*"; }
@@ -356,8 +369,13 @@ check_optional_tools() {
         if [[ "$INSTALL_DEPS" == true ]]; then
             info "Will attempt to install missing tools..."
         else
-            echo -e "  ${DIM}Tip: Re-run with ${CYAN}--install-deps${RESET}${DIM} to install missing tools automatically.${RESET}"
-            echo -e "  ${DIM}Or manually: ${CYAN}sudo pacman -S ${missing[*]}${RESET}"
+            if confirm "You are missing ${#missing[@]} recommended tools. Would you like to install them now?" "y"; then
+                INSTALL_DEPS=true
+                info "Will attempt to install missing tools..."
+            else
+                echo -e "  ${DIM}Tip: Re-run with ${CYAN}--install-deps${RESET}${DIM} to install missing tools automatically.${RESET}"
+                echo -e "  ${DIM}Or manually: ${CYAN}sudo pacman -S ${missing[*]}${RESET}"
+            fi
         fi
     else
         echo ""
@@ -923,6 +941,12 @@ print_results() {
         echo -e "  ${DIM}$CHANGES change(s) would be made. Re-run without --dry-run to apply.${RESET}"
     elif [[ $ERRORS -gt 0 ]]; then
         echo -e "  ${RED}${BOLD}⚠ Installation completed with $ERRORS error(s)${RESET}"
+        if [[ ${#FAILED_CMDS[@]} -gt 0 ]]; then
+            echo -e "  ${RED}Failed Commands:${RESET}"
+            for cmd in "${FAILED_CMDS[@]}"; do
+                echo -e "    ${DIM}• $cmd${RESET}"
+            done
+        fi
     else
         echo -e "  ${GREEN}${BOLD}🎉 Installation Complete!${RESET}"
     fi
