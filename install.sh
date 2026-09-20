@@ -95,7 +95,6 @@ NON_INTERACTIVE=false
 DRY_RUN=false
 INSTALL_DEPS=false
 UNINSTALL=false
-# shellcheck disable=SC2034
 VERBOSE=false
 SKIP_CHECKS=false
 
@@ -191,7 +190,6 @@ usage() {
 
 parse_args() {
     while [[ "$#" -gt 0 ]]; do
-        # shellcheck disable=SC2034
         case $1 in
             --terminal)       TERMINAL="$2"; shift ;;
             --browser)        BROWSER="$2"; shift ;;
@@ -204,6 +202,7 @@ parse_args() {
             --dry-run)        DRY_RUN=true ;;
             --install-deps)   INSTALL_DEPS=true ;;
             --uninstall)      UNINSTALL=true ;;
+# shellcheck disable=SC2034
             --verbose)        VERBOSE=true ;;
             --skip-checks)    SKIP_CHECKS=true ;;
             -v|--version)     echo "J0X Dotfiles Installer v${VERSION}"; exit 0 ;;
