@@ -31,6 +31,17 @@
 
 set -Euo pipefail
 
+# ─────────────────────── Terminal Auto-Launcher ────────────────
+if [[ ! -t 1 ]]; then
+    for term in foot kitty alacritty wezterm gnome-terminal konsole xterm; do
+        if command -v "$term" >/dev/null 2>&1; then
+            exec "$term" -e "$0" "$@"
+        fi
+    done
+    echo "Error: No terminal emulator found. Please run this script in a terminal." >&2
+    exit 1
+fi
+
 # ─────────────────────── Error Handling ──────────────────────
 FAILED_CMDS=()
 trap 'FAILED_CMDS+=("Line $LINENO: $BASH_COMMAND"); ((ERRORS++)) || true' ERR
