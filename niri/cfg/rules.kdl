@@ -25,13 +25,13 @@
     window-rule {
         match is-floating=true
         open-floating true
-    }
+}
 
     window-rule {
         match title="^Open File$"
         match title="^Save File$"
         open-floating true
-    }
+}
 
     // Picture in Picture
     window-rule {
@@ -39,13 +39,13 @@
         match title="^Picture in picture$"
         match app-id="^brave$"
         open-floating true
-    }
+}
 
     window-rule {
         match title=r"(?i)picture[- ]in[- ]picture"
         open-floating true
         default-floating-position x=32 y=32 relative-to="bottom-right"
-    }
+}
 
     // GNOME Sushi previewer
     window-rule {
@@ -54,26 +54,41 @@
         default-column-width { proportion 0.5; }
         default-window-height { proportion 0.7; }
         draw-border-with-background false
-    }
+}
 
     // WezTerm configure bug fix
     window-rule {
         match app-id=r"^org\.wezfurlong\.wezterm$"
         default-column-width 
-    }
+}
+
+    window-rule {
+        match app-id="org.gnome.Calculator"
+    	open-floating true
+    	default-column-width { proportion 0.3; }
+}
+
+    window-rule {
+        // Match by the "app-id" (run 'niri msg windows' to find them)
+    	match app-id="brave-browser__meet"
+    	match app-id="discord"
+    
+    	default-column-width { proportion 0.4; }
+    	open-maximized false
+}
 
     // Zed Editor
     window-rule {
         match title="Zed"
         default-column-width { proportion 0.75; }
         open-on-workspace "coding"
-    }
+}
 
     // Wine apps
     window-rule {
         match app-id="wine"
         open-floating true
-    }
+}
 
     // Emoji Picker (Smile) - Always transparent even when focused
     window-rule {
@@ -81,21 +96,30 @@
         match app-id="it.mijorus.smile"
         open-floating true
         opacity 0.8
-    }
+}
 
     // Fuzzel App Launcher transparency
     window-rule {
         match app-id="fuzzel"
         opacity 0.8
-    }
+}
 
     // Fuzzel layer rule for blur
     layer-rule {
         match namespace="fuzzel"
         background-effect {
             blur true
-        }
     }
+}
+
+    window-rule {
+	match app-id="resolve"
+	match app-id="arduino-ide"
+	// This stops Niri from forcing a weird size on them during boot
+	default-column-width 
+ 
+	open-floating true
+}
 
     // All normal windows transparent/blurred
     window-rule {
@@ -106,11 +130,17 @@
             blur true
             // noise 0.02     // Adds a subtle grain (looks more premium)
             // saturation 1.1 // Slightly boosts colors behind the glass
-        }
     }
+}
 
     // Ensure the active window is almost opaque for clarity
     window-rule {
         match is-active=true
         opacity 0.99
-    }
+}
+
+    // Ensure Picture-in-Picture windows are fully opaque
+    window-rule {
+        match title=r"(?i)picture[- ]in[- ]picture"
+        opacity 1.0
+}

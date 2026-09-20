@@ -7,3 +7,8 @@
     spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
     spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
     spawn-at-startup "niri-float-sticky" "-title" "Picture-in-Picture" "-title" "Picture in picture"
+    spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri"
+    spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP; dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri; systemctl --user restart xdg-desktop-portal xdg-desktop-portal-gnome xdg-desktop-portal-wlr"
+
+    // Display color & brightness setup (Optional - replace with your own color profile script if needed)
+    // spawn-sh-at-startup "~/.local/bin/apply-color-profile.sh"

@@ -1,3 +1,9 @@
+// ==========================================================
+// Author: John Varghese (J0X)
+// LinkedIn: /in/John--Varghese/
+// GitHub: John-Varghese-EH
+// ==========================================================
+
 include "./cfg/animation.kdl"
 include "./cfg/autostart.kdl"
 include "./cfg/keybinds.kdl"

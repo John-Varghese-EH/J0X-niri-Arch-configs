@@ -1,0 +1,41 @@
+name: Validate Configs
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update system and install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm niri shellcheck npm git make gcc
+          # keyd is not in the official Arch repos, so build from source if pacman fails
+          pacman -S --noconfirm keyd || (git clone https://github.com/rvaiya/keyd /tmp/keyd && cd /tmp/keyd && make && make install)
+
+      - name: Validate Niri config
+        run: |
+          mkdir -p /tmp/niri-val
+          cp -r niri/* /tmp/niri-val/
+          niri validate -c /tmp/niri-val/config.kdl
+
+      - name: Validate Keyd config
+        run: |
+          keyd check keyd/default.conf
+
+      - name: Lint install.sh
+        run: |
+          shellcheck install.sh
+
+      - name: Lint Markdown
+        continue-on-error: true
+        run: |
+          npx markdownlint-cli README.md KEYBINDS.md || true

@@ -1,0 +1,33 @@
+{
+  "activeBackend": "qt6-multimedia",
+  "automationMode": "random",
+  "automationTime": 300,
+  "fillMode": "fit",
+  "mpvSocket": "/tmp/mpv-socket",
+  "profile": "default",
+  "volume": 1,
+  "wallpapersFolder": "/home/j0x/Pictures/Wallpapers/video",
+  "thumbCacheReady": true,
+  "enabled": false,
+  "eDP-1": {
+    "currentWallpaper": "/home/j0x/Pictures/Wallpapers/video/RB22.mp4",
+    "isPlaying": true,
+    "noctaliaWallpaper": "/home/j0x/Pictures/Wallpapers/BlackArch/City_in_blue.png",
+    "isMuted": true,
+    "orientation": 0,
+    "volume": 0.5,
+    "automation": true,
+    "automationMode": "random",
+    "automationTime": 1800,
+    "hardwareAcceleration": false,
+    "profile": "default",
+    "fillMode": "fit"
+  },
+  "monitorSpecific": true,
+  "automationCustomTime": [],
+  "HDMI-A-1": {
+    "currentWallpaper": "/home/j0x/Pictures/Wallpapers/video/F1 WALLPAPER VIDEO.mp4",
+    "noctaliaWallpaper": "/home/j0x/Pictures/Wallpapers/GTR.jpg"
+  }
+}
+

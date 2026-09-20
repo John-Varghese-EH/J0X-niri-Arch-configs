@@ -29,11 +29,15 @@ binds {
     Mod+Alt+O hotkey-overlay-title="Toggle Window Opacity" { toggle-window-rule-opacity; }
     Mod+Shift+W hotkey-overlay-title="Reload Waybar" { spawn "pkill" "-USR2" "waybar"; }
     Mod+Shift+P hotkey-overlay-title="Power Off Monitors" { power-off-monitors; }
+    // Mod+Shift+B hotkey-overlay-title="Headless Mode (Screen Off)" { spawn "~/.local/bin/remote-screen.sh"; }
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Shift+ESCAPE { show-hotkey-overlay; }
     Mod+F1 { show-hotkey-overlay; }
     Mod+ESCAPE allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     
+    // Mod + Alt + P for a Power & Thermal dashboard
+    Mod+ALT+P { spawn "alacritty" "-e" "watch" "-n" "1" "nvidia-smi; sensors; cat /sys/class/power_supply/BAT0/power_now"; }
+
     // Emergency Exit
     CTRL+ALT+Delete { quit; }
 
@@ -152,20 +156,20 @@ binds {
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
     
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Ctrl+1 { move-window-to-workspace 1; }
+    Mod+Ctrl+2 { move-window-to-workspace 2; }
+    Mod+Ctrl+3 { move-window-to-workspace 3; }
+    Mod+Ctrl+4 { move-window-to-workspace 4; }
+    Mod+Ctrl+5 { move-window-to-workspace 5; }
+    Mod+Ctrl+6 { move-window-to-workspace 6; }
+    Mod+Ctrl+7 { move-window-to-workspace 7; }
+    Mod+Ctrl+8 { move-window-to-workspace 8; }
+    Mod+Ctrl+9 { move-window-to-workspace 9; }
     
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up { move-column-to-workspace-up; }
-    Mod+Ctrl+U { move-column-to-workspace-down; }
-    Mod+Ctrl+I { move-column-to-workspace-up; }
+    Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
+    Mod+Ctrl+Page_Up { move-window-to-workspace-up; }
+    Mod+Ctrl+U { move-window-to-workspace-down; }
+    Mod+Ctrl+I { move-window-to-workspace-up; }
     
     Mod+Shift+Page_Down { move-workspace-down; }
     Mod+Shift+Page_Up { move-workspace-up; }
@@ -185,6 +189,14 @@ binds {
 
     XF86MonBrightnessUp allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+
+    // ────────────── DISPLAY PRESETS (Optional Scripts) ──────────────
+    // Uncomment these if you have custom display preset scripts
+    // Mod+F5 hotkey-overlay-title="Display: Cinema" { spawn "display-preset" "cinema"; }
+    // Mod+F6 hotkey-overlay-title="Display: Vivid" { spawn "display-preset" "vivid"; }
+    // Mod+F7 hotkey-overlay-title="Display: Natural" { spawn "display-preset" "natural"; }
+    // Mod+F8 hotkey-overlay-title="Display: Night" { spawn "display-preset" "night"; }
+    // Mod+F9 hotkey-overlay-title="Display: Adaptive" { spawn "display-preset" "adaptive"; }
 
     // ────────────── LAYOUT & RESIZING ──────────────
     
@@ -209,4 +221,13 @@ binds {
     
     // Sticky Floating Windows (Moved to Shift+Y to avoid Screenshot conflict)
     Mod+Shift+Y { spawn "niri-float-sticky" "-ipc" "toggle_sticky"; }
+    
+    // Keyboard Mouse Control via ydotool (triggered by keyd layer)
+    Ctrl+Alt+Shift+Up { spawn "ydotool" "mousemove" "-x" "0" "-y" "-25"; }
+    Ctrl+Alt+Shift+Down { spawn "ydotool" "mousemove" "-x" "0" "-y" "25"; }
+    Ctrl+Alt+Shift+Left { spawn "ydotool" "mousemove" "-x" "-25" "-y" "0"; }
+    Ctrl+Alt+Shift+Right { spawn "ydotool" "mousemove" "-x" "25" "-y" "0"; }
+    Ctrl+Alt+Shift+Comma { spawn "ydotool" "click" "C0"; }
+    Ctrl+Alt+Shift+Period { spawn "ydotool" "click" "C1"; }
+
 }

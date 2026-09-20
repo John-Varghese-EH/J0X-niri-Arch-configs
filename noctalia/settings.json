@@ -4,8 +4,8 @@
         "clipboardWatchImageCommand": "wl-paste --type image --watch cliphist store",
         "clipboardWatchTextCommand": "wl-paste --type text --watch cliphist store",
         "clipboardWrapText": true,
-        "customLaunchPrefix": "",
-        "customLaunchPrefixEnabled": false,
+        "customLaunchPrefix": "systemd-run --user --scope --collect --",
+        "customLaunchPrefixEnabled": true,
         "density": "default",
         "enableClipPreview": true,
         "enableClipboardChips": true,
@@ -32,7 +32,17 @@
             "brave-hnpfjngllnobngcgfapefoaidbinmjnm-Default",
             "brave-agimnkijcaahngcdmfeangaknmldooml-Default",
             "waydroid.com.instagram.android",
-            "com.blackmagicdesign.resolve"
+            "com.blackmagicdesign.resolve",
+            "brave-browser",
+            "brave-jnoeidcckildnbigjhamhkamcfpchbai-Default",
+            "brave-njcoiplafbapongpmaefmjaemhamnfnm-Default",
+            "brave-ggndijafbhiohpmmjicffjgeddiaogbj-Default",
+            "brave-hkfjgbonoebjhkkcgeijgljjagfeomke-Default",
+            "brave-bnicagfhbffdbhpcefpkjfehepdhpbeg-Default",
+            "brave-kopccclfmeiiochlfbjhmbojhdaiejge-Default",
+            "io.github.wazzaps.Fingerpaint",
+            "md.obsidian.Obsidian",
+            "ghidra"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -49,7 +59,7 @@
         "spectrumFrameRate": 30,
         "spectrumMirrored": true,
         "visualizerType": "linear",
-        "volumeFeedback": false,
+        "volumeFeedback": true,
         "volumeFeedbackSoundFile": "",
         "volumeOverdrive": false,
         "volumeStep": 5
@@ -153,6 +163,26 @@
                     "useCustomFont": false
                 },
                 {
+                    "defaultSettings": {
+                        "compactMode": false,
+                        "defaultPeerAction": "copy-ip",
+                        "hideDisconnected": false,
+                        "hideMullvadExitNodes": true,
+                        "loginServer": "",
+                        "pingCount": 5,
+                        "refreshInterval": 5000,
+                        "showIpAddress": true,
+                        "showPeerCount": true,
+                        "showSearchBar": false,
+                        "sshUsername": "",
+                        "taildropDownloadDir": "~/Downloads",
+                        "taildropEnabled": true,
+                        "taildropReceiveMode": "operator",
+                        "terminalCommand": ""
+                    },
+                    "id": "plugin:tailscale"
+                },
+                {
                     "colorizeIcons": false,
                     "hideMode": "hidden",
                     "id": "ActiveWindow",
@@ -208,39 +238,20 @@
                     "width": 1
                 },
                 {
-                    "defaultSettings": {
-                        "audioCodec": "opus",
-                        "audioSource": "default_output",
-                        "colorRange": "limited",
-                        "copyToClipboard": false,
-                        "customReplayDuration": "30",
-                        "directory": "",
-                        "filenamePattern": "recording_yyyyMMdd_HHmmss",
-                        "frameRate": "60",
-                        "hideInactive": false,
-                        "iconColor": "none",
-                        "quality": "very_high",
-                        "replayDuration": "30",
-                        "replayEnabled": false,
-                        "replayStorage": "ram",
-                        "resolution": "original",
-                        "restorePortalSession": false,
-                        "showCursor": true,
-                        "videoCodec": "h264",
-                        "videoSource": "portal"
-                    },
-                    "id": "plugin:screen-recorder"
-                },
-                {
-                    "defaultSettings": {
-                        "autoStartBreaks": false,
-                        "autoStartWork": false,
-                        "longBreakDuration": 15,
-                        "sessionsBeforeLongBreak": 4,
-                        "shortBreakDuration": 5,
-                        "workDuration": 25
-                    },
-                    "id": "plugin:pomodoro"
+                    "blacklist": [
+                    ],
+                    "chevronColor": "none",
+                    "colorizeIcons": false,
+                    "drawerEnabled": true,
+                    "hidePassive": false,
+                    "id": "Tray",
+                    "pinned": [
+                        "proton.vpn.app.gtk",
+                        "tray-icon tray app 431632-1",
+                        "1",
+                        "iProjection",
+                        "tray-icon tray app main-tray"
+                    ]
                 },
                 {
                     "defaultSettings": {
@@ -255,16 +266,28 @@
                     "id": "plugin:usb-drive-manager"
                 },
                 {
-                    "blacklist": [
-                    ],
-                    "chevronColor": "none",
-                    "colorizeIcons": false,
-                    "drawerEnabled": true,
-                    "hidePassive": false,
-                    "id": "Tray",
-                    "pinned": [
-                        "proton.vpn.app.gtk"
-                    ]
+                    "defaultSettings": {
+                        "activeBackend": "qt6-multimedia",
+                        "automationMode": "random",
+                        "automationTime": 300,
+                        "fillMode": "fit",
+                        "mpvSocket": "/tmp/mpv-socket",
+                        "profile": "default",
+                        "volume": 1,
+                        "wallpapersFolder": "~/Pictures/Wallpapers"
+                    },
+                    "id": "plugin:video-wallpaper"
+                },
+                {
+                    "defaultSettings": {
+                        "autoStartBreaks": false,
+                        "autoStartWork": false,
+                        "longBreakDuration": 15,
+                        "sessionsBeforeLongBreak": 4,
+                        "shortBreakDuration": 5,
+                        "workDuration": 25
+                    },
+                    "id": "plugin:pomodoro"
                 },
                 {
                     "hideWhenZero": false,
@@ -294,8 +317,8 @@
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
+                    "showNoctaliaPerformance": true,
+                    "showPowerProfiles": true
                 },
                 {
                     "colorizeDistroLogo": false,
@@ -306,19 +329,6 @@
                     "icon": "power",
                     "id": "ControlCenter",
                     "useDistroLogo": false
-                },
-                {
-                    "defaultSettings": {
-                        "activeColor": "primary",
-                        "camFilterRegex": "",
-                        "enableToast": true,
-                        "hideInactive": false,
-                        "iconSpacing": 4,
-                        "inactiveColor": "none",
-                        "micFilterRegex": "",
-                        "removeMargins": false
-                    },
-                    "id": "plugin:privacy-indicator"
                 }
             ]
         }
@@ -399,10 +409,10 @@
                     "id": "Bluetooth"
                 },
                 {
-                    "id": "WallpaperSelector"
+                    "id": "NoctaliaPerformance"
                 },
                 {
-                    "id": "NoctaliaPerformance"
+                    "id": "WallpaperSelector"
                 },
                 {
                     "defaultSettings": {
@@ -422,6 +432,30 @@
                 },
                 {
                     "id": "NightLight"
+                },
+                {
+                    "defaultSettings": {
+                        "audioCodec": "opus",
+                        "audioSource": "default_output",
+                        "colorRange": "limited",
+                        "copyToClipboard": false,
+                        "customReplayDuration": "30",
+                        "directory": "",
+                        "filenamePattern": "recording_yyyyMMdd_HHmmss",
+                        "frameRate": "60",
+                        "hideInactive": false,
+                        "iconColor": "none",
+                        "quality": "very_high",
+                        "replayDuration": "30",
+                        "replayEnabled": false,
+                        "replayStorage": "ram",
+                        "resolution": "original",
+                        "restorePortalSession": false,
+                        "showCursor": true,
+                        "videoCodec": "h264",
+                        "videoSource": "portal"
+                    },
+                    "id": "plugin:screen-recorder"
                 }
             ]
         }
@@ -437,28 +471,27 @@
                     {
                         "clockColor": "primary",
                         "clockStyle": "minimal",
-                        "customFont": "",
+                        "customFont": "Adwaita Sans",
                         "format": "HH:mm\\nd MMMM yyyy",
                         "id": "Clock",
                         "roundedCorners": true,
-                        "scale": 2.3915640482882132,
+                        "scale": 3.673747516361632,
                         "showBackground": false,
-                        "useCustomFont": true,
-                        "x": 1610,
-                        "y": 99
+                        "useCustomFont": false,
+                        "x": 1108,
+                        "y": 97
                     },
                     {
                         "hideMode": "visible",
                         "id": "MediaPlayer",
                         "roundedCorners": true,
-                        "scale": 0.7430845361688877,
                         "showAlbumArt": true,
                         "showBackground": true,
                         "showButtons": true,
                         "showVisualizer": true,
                         "visualizerType": "linear",
-                        "x": 1564,
-                        "y": 945
+                        "x": 1088,
+                        "y": 733
                     }
                 ]
             },
@@ -652,23 +685,23 @@
         "weatherTaliaMascotAlways": false
     },
     "network": {
-        "bluetoothAutoConnect": true,
+        "bluetoothAutoConnect": false,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,
         "bluetoothRssiPollingEnabled": false,
-        "disableDiscoverability": false,
-        "networkPanelView": "ethernet",
+        "disableDiscoverability": true,
+        "networkPanelView": "wifi",
         "wifiDetailsViewMode": "grid"
     },
     "nightLight": {
         "autoSchedule": true,
-        "dayTemp": "6357",
-        "enabled": false,
+        "dayTemp": "6095",
+        "enabled": true,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4529"
+        "nightTemp": "4843"
     },
     "noctaliaPerformance": {
         "disableDesktopWidgets": false,
@@ -677,7 +710,7 @@
     "notifications": {
         "backgroundOpacity": 0.8,
         "clearDismissed": true,
-        "criticalUrgencyDuration": 15,
+        "criticalUrgencyDuration": 12,
         "density": "default",
         "enableBatteryToast": true,
         "enableKeyboardLayoutToast": true,
@@ -685,12 +718,12 @@
         "enableMediaToast": false,
         "enabled": true,
         "location": "top_right",
-        "lowUrgencyDuration": 3,
+        "lowUrgencyDuration": 2,
         "monitors": [
         ],
-        "normalUrgencyDuration": 8,
+        "normalUrgencyDuration": 5,
         "overlayLayer": true,
-        "respectExpireTimeout": false,
+        "respectExpireTimeout": true,
         "saveToHistory": {
             "critical": true,
             "low": true,
@@ -826,9 +859,9 @@
     "ui": {
         "boxBorderEnabled": true,
         "fontDefault": "Adwaita Sans",
-        "fontDefaultScale": 1.05,
+        "fontDefaultScale": 0.95,
         "fontFixed": "monospace",
-        "fontFixedScale": 1,
+        "fontFixedScale": 0.9,
         "panelBackgroundOpacity": 0.52,
         "panelsAttachedToBar": true,
         "scrollbarAlwaysVisible": false,
@@ -838,7 +871,7 @@
         "translucentWidgets": true
     },
     "wallpaper": {
-        "automationEnabled": true,
+        "automationEnabled": false,
         "directory": "/home/j0x/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
